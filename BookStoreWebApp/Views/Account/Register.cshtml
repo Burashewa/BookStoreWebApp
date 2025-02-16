@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Register"; 
+}
+@model UserRegisterModel
+
+<div class="container1">
+    <div class="registration form">
+        <header>Signup</header>
+        <form asp-action="Register" method="post">
+            <div>
+                <input asp-for="UserName" type="text" placeholder="Enter your username" required>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="Email" type="email" placeholder="Enter your email" required>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="Password" type="password" placeholder="Create a password" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm your password" required>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <input type="submit" class="button" value="Signup">
+        </form>
+        <div class="signup">
+            <span class="signup">
+                Already have an account?
+                <a asp-controller="Account" asp-action="Login">Login</a>
+            </span>
+        </div>
+    </div>
+
+</div>
+
