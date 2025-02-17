@@ -1,5 +1,4 @@
-﻿
-@model List<BookStoreWebApp.Models.Users>
+﻿@model List<BookStoreWebApp.Models.Users>
 
 @{
     ViewData["Title"] = "Admin Dashboard";
@@ -31,6 +30,8 @@
                 <td>@user.email</td>
                 <td>@(user.isAdmin ? "✅ Yes" : "❌ No")</td>
                 <td>
+                    <a asp-action="EditUser" asp-route-id="@user.ID" class="btn btn-warning btn-sm">Edit</a>
+
                     @if (!user.isAdmin)
                     {
                         <a asp-action="DeleteUser" asp-route-id="@user.ID" class="btn btn-danger btn-sm"

@@ -46,7 +46,7 @@ namespace BookStoreWebApp.Controllers
 
                     if (user.isAdmin)
                     {
-                        return RedirectToAction("AdminDashboard");
+                        return RedirectToAction("AdminDashboard", "Admin");
                     }
                     return RedirectToAction("Index", "Home");
                 }
@@ -64,7 +64,7 @@ namespace BookStoreWebApp.Controllers
                 var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.email == model.Email);
                 if (existingUser != null)
                 {
-                    ModelState.AddModelError("", "Email already in use.");
+                    ModelState.AddModelError("Email", "Email already in use.");
                     return View(model);
                 }
 
@@ -79,61 +79,20 @@ namespace BookStoreWebApp.Controllers
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
-                return RedirectToAction("Login");
+                return RedirectToAction("Login","Account");
             }
 
             return View(model);
         }
 
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
-        }
+        //public IActionResult Logout()
+        //{
+        //    HttpContext.Session.Clear();
+        //    return RedirectToAction("Index", "Home");
+        //}
 
-        // ✅ Admin Dashboard
-        public async Task<IActionResult> AdminDashboard()
-        {
-            // Check if user is an admin
-            var isAdmin = HttpContext.Session.GetString("IsAdmin");
-            if (isAdmin != "true")
-            {
-                return RedirectToAction("Login");
-            }
+        
 
-            var users = await _context.Users.ToListAsync();
-            return View(users);
-        }
-
-        // ✅ Delete User (Admin Only)
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var isAdmin = HttpContext.Session.GetString("IsAdmin");
-            if (isAdmin != "true")
-            {
-                TempData["Error"] = "Unauthorized Access!";
-                return RedirectToAction("Login");
-            }
-
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            // Prevent admin from deleting themselves
-            var loggedInUserId = HttpContext.Session.GetString("UserId");
-            if (loggedInUserId == user.ID.ToString())
-            {
-                TempData["Error"] = "You cannot delete yourself!";
-                return RedirectToAction("AdminDashboard");
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("AdminDashboard");
-        }
 
         // ✅ Helper Method: Hash Password
         private string HashPassword(string password)
