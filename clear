@@ -1,0 +1,11 @@
+[33mcommit 0f7923a8f842e729ce770cdde6e5bc2a2f46ba68[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Buka <Buka@DESKTOP-H97HILL>
+Date:   Mon Feb 17 01:30:22 2025 +0300
+
+    Add project files.
+
+[33mcommit 8f589a69ce6ce7b145d9042ddb72d2de87e0a2a1[m
+Author: Buka <Buka@DESKTOP-H97HILL>
+Date:   Mon Feb 17 01:30:16 2025 +0300
+
+    Add .gitattributes, .gitignore, and README.md.
